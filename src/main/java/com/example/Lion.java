@@ -14,7 +14,7 @@ public class Lion {
         } else if ("Самка".equals(sex)) {
             hasMane = false;
         } else {
-            throw new Exception("Используйте допустимые значения пола животного - самей или самка");
+            throw new Exception("Используйте допустимые значения пола животного - Самец или Самка");
         }
     }
 
@@ -22,7 +22,7 @@ public class Lion {
 
     public int getKittens() {
         return predator.getKittens();
-        //feline.getKittens();
+        //return feline.getKittens();
     }
 
     public boolean doesHaveMane() {
@@ -30,6 +30,7 @@ public class Lion {
     }
 
     public List<String> getFood() throws Exception {
-        return predator.eatMeat(); //feline.getFood("Хищник");
+        return predator.eatMeat();
+        //return feline.getFood("Хищник");
     }
 }
