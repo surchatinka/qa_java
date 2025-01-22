@@ -18,11 +18,8 @@ public class Lion {
         }
     }
 
-    //Feline feline = new Feline();
-
     public int getKittens() {
         return predator.getKittens();
-        //return feline.getKittens();
     }
 
     public boolean doesHaveMane() {
@@ -31,6 +28,5 @@ public class Lion {
 
     public List<String> getFood() throws Exception {
         return predator.eatMeat();
-        //return feline.getFood("Хищник");
     }
 }

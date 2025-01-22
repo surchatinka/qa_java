@@ -3,31 +3,24 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
-    public FelineTest(int numberOfKittens) {
-        this.numberOfKittens = numberOfKittens;
-    }
+    public static final String FAMILY_NAME = "Кошачьи";
+    public static final int DEFAULT_KITTENS_COUNT = 1;
+    public static final int KITTENS_COUNT = 10;
+    @Spy private Feline feline = new Feline();
 
     @Before
     public void init() {
         MockitoAnnotations.openMocks(this);
     }
-
-    private final int numberOfKittens;
-    //@Spy Animal animal = new Animal();
-
-    @Spy private Feline feline = new Feline();
-
-    //private final Feline felineSpy = Mockito.spy(feline);
 
     @Test
     public void eatMeatTest() throws Exception {
@@ -38,27 +31,27 @@ public class FelineTest {
     @Test
     public void getFamilyTest(){
         String family = feline.getFamily();
-        Assert.assertEquals(family,"Кошачьи");
+        Assert.assertEquals(family, FAMILY_NAME);
     }
 
-    //parameters getKittens() getKittens(int i)
     @Test
     public void getKittensTest(){
         feline.getKittens();
-        Mockito.verify(feline,Mockito.times(1)).getKittens(1);
+        Mockito.verify(feline,Mockito.times(1)).getKittens(DEFAULT_KITTENS_COUNT);
     }
 
-    @Parameterized.Parameters
-    public static Object[][] kittensParameters(){
-        return new Object[][]{
-               {0},{1},{1000000}
-        };
-    }
+    //отключить
+//    @Parameterized.Parameters
+//    public static Object[][] kittensParameters(){
+//        return new Object[][]{
+//               {0},{1},{1000000}
+//        };
+//    }
 
     @Test
     public void getNumberKittensTest(){
-        int number = feline.getKittens(numberOfKittens);
-        Assert.assertEquals(number,numberOfKittens);
+        int number = feline.getKittens(KITTENS_COUNT);
+        Assert.assertEquals(number,KITTENS_COUNT);
     }
 
 }
