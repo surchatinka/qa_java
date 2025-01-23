@@ -7,14 +7,12 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
-    public static final int DEFAULT_NUMBER_CUBS = 1;
-    public static final String MALE = "Самец";
-    public static final String WRONG_SEX_TYPE = "Самурай";
-
+    private static final int DEFAULT_NUMBER_CUBS = 1;
+    private static final String MALE = "Самец";
+    private static final String WRONG_SEX_TYPE = "Самурай";
     @Spy private Feline feline = new Feline();
 
     @Test

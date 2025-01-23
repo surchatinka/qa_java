@@ -8,25 +8,28 @@ import org.mockito.Spy;
 
 @RunWith(Parameterized.class)
 public class LionParameterizedTest {
+
+    private static final String MALE = "Самец";
+    private static final String FEMALE = "Самка";
+    private final String sex;
+    private final boolean mane;
+    @Spy Feline feline = new Feline();
+
     public LionParameterizedTest(String sex, boolean mane) {
         this.sex = sex;
         this.mane = mane;
     }
 
-    private final String sex;
-    private final boolean mane;
-    @Spy Feline feline = new Feline();
-
     @Parameterized.Parameters
     public static Object[][] lionData(){
         return new Object[][]{
-                {"Самец",true},{"Самка",false}
+                {MALE,true},{FEMALE,false}
         };
     }
     @Test
     public void doesHaveManeTest() throws Exception {
         Lion lion = new Lion(feline,sex);
-        boolean check = lion.doesHaveMane();
-        Assert.assertEquals(check,mane);
+        boolean actual = lion.doesHaveMane();
+        Assert.assertEquals(actual,mane);
     }
 }

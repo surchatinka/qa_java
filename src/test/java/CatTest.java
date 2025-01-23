@@ -9,8 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CatTest {
-    public static final String DEFAULT_SOUND = "Мяу";
-    @Mock Feline feline = new Feline();
+    private static final String DEFAULT_SOUND = "Мяу";
+    @Mock private Feline feline = new Feline();
 
     @Test
     public void getSoundTest() {

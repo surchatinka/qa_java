@@ -4,13 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
 
-
 public class AlexTheLionTest {
     private static final List<String> ALEX_FRIENDS = List.of("Марти", "Глория", "Мелман", "Джулиан Тринадцатый");
     private static final String ZOO = "Нью-Йоркский зоопарк";
     private static final int NO_KITTENS = 0;
-
-    Feline feline = new Feline();
+    private final Feline feline = new Feline();
 
     @Test
     public void getFriendsTest() throws Exception {

@@ -8,13 +8,13 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
-    public static final String FAMILY_NAME = "Кошачьи";
-    public static final int DEFAULT_KITTENS_COUNT = 1;
-    public static final int KITTENS_COUNT = 10;
+    private static final String FAMILY_NAME = "Кошачьи";
+    private static final int DEFAULT_NUMBER_OF_KITTENS = 1;
+    private static final int NUMBER_OF_KITTENS = 10;
+    private static final String FOR_PREDATOR = "Хищник";
     @Spy private Feline feline = new Feline();
 
     @Before
@@ -25,7 +25,7 @@ public class FelineTest {
     @Test
     public void eatMeatTest() throws Exception {
         feline.eatMeat();
-        Mockito.verify(feline).getFood(Mockito.anyString());
+        Mockito.verify(feline).getFood(FOR_PREDATOR);
     }
 
     @Test
@@ -37,21 +37,13 @@ public class FelineTest {
     @Test
     public void getKittensTest(){
         feline.getKittens();
-        Mockito.verify(feline,Mockito.times(1)).getKittens(DEFAULT_KITTENS_COUNT);
+        Mockito.verify(feline).getKittens(DEFAULT_NUMBER_OF_KITTENS);
     }
-
-    //отключить
-//    @Parameterized.Parameters
-//    public static Object[][] kittensParameters(){
-//        return new Object[][]{
-//               {0},{1},{1000000}
-//        };
-//    }
 
     @Test
     public void getNumberKittensTest(){
-        int number = feline.getKittens(KITTENS_COUNT);
-        Assert.assertEquals(number,KITTENS_COUNT);
+        int number = feline.getKittens(NUMBER_OF_KITTENS);
+        Assert.assertEquals(number, NUMBER_OF_KITTENS);
     }
 
 }
