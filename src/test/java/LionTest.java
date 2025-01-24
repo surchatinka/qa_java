@@ -3,9 +3,12 @@ import com.example.Lion;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
@@ -13,29 +16,35 @@ public class LionTest {
     private static final int DEFAULT_NUMBER_CUBS = 1;
     private static final String MALE = "Самец";
     private static final String WRONG_SEX_TYPE = "Самурай";
-    @Spy private Feline feline = new Feline();
+    @Spy private Feline felineSpy = new Feline();
+    @Mock private Feline felineMock = new Feline();
 
     @Test
-    public void getKittensTest() throws Exception {
-        Lion lion = new Lion(feline, MALE);
-        int numberOfCubs = lion.getKittens();
-        Mockito.verify(feline).getKittens();
-        Assert.assertEquals(numberOfCubs, DEFAULT_NUMBER_CUBS);
+    public void getKittensCallTest() throws Exception {
+        Lion lion = new Lion(felineMock, MALE);
+        lion.getKittens();
+        Mockito.verify(felineMock).getKittens();
+    }
+    @Test
+    public void getKittensValuesTest() throws Exception {
+        Lion lion = new Lion(felineSpy, MALE);
+        Mockito.when(felineMock.getKittens()).thenReturn(DEFAULT_NUMBER_CUBS);
+        int expected = lion.getKittens();
+        Assert.assertEquals(expected,DEFAULT_NUMBER_CUBS);
     }
 
     @Test
     public void getFoodTest() throws Exception {
-        Lion lion = new Lion(feline, MALE);
+        Lion lion = new Lion(felineMock, MALE);
         lion.getFood();
-        Mockito.verify(feline).eatMeat();
+        Mockito.verify(felineMock).eatMeat();
+
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void createLionTestThrowsException() {
-       try{
-            new Lion(feline,WRONG_SEX_TYPE);
-        } catch(Exception e){
-            Assert.assertEquals("Используйте допустимые значения пола животного - Самец или Самка",e.getMessage());
-        }
-        }
+        RuntimeException caughtException =
+                (RuntimeException) Assert.assertThrows(Exception.class, () -> new Lion(felineMock,WRONG_SEX_TYPE));
+        Assert.assertEquals("Используйте допустимые значения пола животного - Самец или Самка", caughtException.getMessage());
+    }
 }
