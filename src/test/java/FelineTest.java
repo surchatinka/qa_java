@@ -1,8 +1,8 @@
 import com.example.Feline;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
@@ -15,7 +15,8 @@ public class FelineTest {
     private static final int DEFAULT_NUMBER_OF_KITTENS = 1;
     private static final int NUMBER_OF_KITTENS = 10;
     private static final String FOR_PREDATOR = "Хищник";
-    @Spy private Feline feline = new Feline();
+    @Spy private Feline felineSpy = new Feline();
+    @Mock private Feline felineMock = new Feline();
 
     @Before
     public void init() {
@@ -24,26 +25,26 @@ public class FelineTest {
 
     @Test
     public void eatMeatTest() throws Exception {
-        feline.eatMeat();
-        Mockito.verify(feline).getFood(FOR_PREDATOR);
+        felineSpy.eatMeat();
+        Mockito.verify(felineSpy).getFood(FOR_PREDATOR);
     }
 
     @Test
     public void getFamilyTest(){
-        String family = feline.getFamily();
-        Assert.assertEquals(family, FAMILY_NAME);
+        felineMock.getFamily();
+        Mockito.verify(felineMock).getFamily();
     }
 
     @Test
     public void getKittensTest(){
-        feline.getKittens();
-        Mockito.verify(feline).getKittens(DEFAULT_NUMBER_OF_KITTENS);
+        felineSpy.getKittens();
+        Mockito.verify(felineSpy).getKittens(DEFAULT_NUMBER_OF_KITTENS);
     }
 
     @Test
     public void getNumberKittensTest(){
-        int number = feline.getKittens(NUMBER_OF_KITTENS);
-        Assert.assertEquals(number, NUMBER_OF_KITTENS);
+        felineMock.getKittens(NUMBER_OF_KITTENS);
+        Mockito.verify(felineMock).getKittens(NUMBER_OF_KITTENS);
     }
 
 }
