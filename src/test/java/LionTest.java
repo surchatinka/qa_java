@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,7 +28,7 @@ public class LionTest {
     }
     @Test
     public void getKittensValuesTest() throws Exception {
-        Lion lion = new Lion(felineSpy, MALE);
+        Lion lion = new Lion(felineMock, MALE);
         Mockito.when(felineMock.getKittens()).thenReturn(DEFAULT_NUMBER_CUBS);
         int expected = lion.getKittens();
         Assert.assertEquals(expected,DEFAULT_NUMBER_CUBS);
