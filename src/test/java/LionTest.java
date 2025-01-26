@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
@@ -17,7 +16,6 @@ public class LionTest {
     private static final int DEFAULT_NUMBER_CUBS = 1;
     private static final String MALE = "Самец";
     private static final String WRONG_SEX_TYPE = "Самурай";
-    @Spy private Feline felineSpy = new Feline();
     @Mock private Feline felineMock = new Feline();
 
     @Test
