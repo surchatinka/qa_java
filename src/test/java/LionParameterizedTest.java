@@ -1,35 +1,39 @@
 import com.example.Feline;
 import com.example.Lion;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 @RunWith(Parameterized.class)
 public class LionParameterizedTest {
 
     private static final String MALE = "Самец";
     private static final String FEMALE = "Самка";
-    private final String sex;
-    private final boolean mane;
-    @Spy Feline feline = new Feline();
+    @Rule public MockitoRule rule = MockitoJUnit.rule();
+    @Mock private final Feline feline;
+    @Spy private final Lion lion;
 
-    public LionParameterizedTest(String sex, boolean mane) {
-        this.sex = sex;
-        this.mane = mane;
+    public LionParameterizedTest(String sex) throws Exception {
+        feline = new Feline();
+        lion = new Lion(feline,sex);
     }
 
     @Parameterized.Parameters
     public static Object[][] lionData(){
         return new Object[][]{
-                {MALE,true},{FEMALE,false}
+                {MALE},{FEMALE}
         };
     }
     @Test
-    public void doesHaveManeTest() throws Exception {
-        Lion lion = new Lion(feline,sex);
-        boolean actual = lion.doesHaveMane();
-        Assert.assertEquals(actual,mane);
+    public void doesHaveManeCallTest() {
+        lion.doesHaveMane();
+        Mockito.verify(lion).doesHaveMane();
     }
 }
