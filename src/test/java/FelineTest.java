@@ -10,7 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
-    private static final String FAMILY_NAME = "Кошачьи";
     private static final int DEFAULT_NUMBER_OF_KITTENS = 1;
     private static final int NUMBER_OF_KITTENS = 10;
     private static final String FOR_PREDATOR = "Хищник";
@@ -44,5 +43,4 @@ public class FelineTest {
         feline.getKittens(NUMBER_OF_KITTENS);
         Mockito.verify(feline).getKittens(NUMBER_OF_KITTENS);
     }
-
 }

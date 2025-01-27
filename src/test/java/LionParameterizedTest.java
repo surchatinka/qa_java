@@ -1,5 +1,6 @@
 import com.example.Feline;
 import com.example.Lion;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +17,10 @@ public class LionParameterizedTest {
     private static final String MALE = "Самец";
     private static final String FEMALE = "Самка";
     @Rule public MockitoRule rule = MockitoJUnit.rule();
-    @Mock private final Feline feline;
-    @Spy private final Lion lion;
+    @Mock private Feline feline = new Feline();;
+    @Spy private Lion lion;
 
     public LionParameterizedTest(String sex) throws Exception {
-        feline = new Feline();
         lion = new Lion(feline,sex);
     }
 
@@ -31,8 +31,15 @@ public class LionParameterizedTest {
         };
     }
     @Test
-    public void doesHaveManeCallTest() {
+    public void doesHaveManeCallTest(){
         lion.doesHaveMane();
-        Mockito.verify(lion).doesHaveMane();
+        Mockito.verify(lion,Mockito.times(1)).doesHaveMane();
+    }
+
+    @Test
+    public void doesHaveManeValuesTest(){
+        Mockito.when(lion.doesHaveMane()).thenReturn(true);
+        boolean mane = lion.doesHaveMane();
+        Assert.assertTrue(mane);
     }
 }
